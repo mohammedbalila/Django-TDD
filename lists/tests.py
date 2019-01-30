@@ -19,7 +19,7 @@ class ListsHome(TestCase):
         self.assertIn('A new list item', response.content.decode())
         expected_html = render_to_string('lists/home.html',
                                          {'new_item_text': 'A new list item'})
-                                         
+
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content.decode(), expected_html)
 
@@ -34,6 +34,9 @@ class ListsHome(TestCase):
         new_item = Item.objects.first()
         self.assertEqual(new_item.text, 'A new list item')
 
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
+        
 class ItemModelTest(TestCase):
     
     def test_saving_and_retriving_models(self):
