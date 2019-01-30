@@ -1,6 +1,6 @@
 **Django TDD repo**
 ***
-This is a repo shows how to use TDD with [Django](https://docs.djangoproject.com/)
+This repo shows how to use TDD with [Django](https://docs.djangoproject.com/)
 <br>
 
 Following this great book <br>
