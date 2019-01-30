@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import resolve, reverse
 from lists.views import HomePage
 from django.http import HttpRequest
+from django.template.loader import render_to_string
 
 clinet = Client()
 
@@ -12,9 +13,11 @@ class ListsHome(TestCase):
         self.assertEqual(found.func, HomePage) 
     
     def test_home_page_returns_correct_html(self):
-        response = clinet.get('/')
+        request = HttpRequest()
+        # response = clinet.get('/')
+        response = HomePage(request)
+        expected_html = render_to_string('lists/home.html')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'<title>To-Do</title>', response.content)      
-        self.assertTrue(response.content.endswith(b'</html>'))  
+        self.assertEqual(response.content.decode(), expected_html)  
 # Create your tests here.
 
