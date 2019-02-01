@@ -10,8 +10,8 @@ def HomePage(request):
         item.save()
         return redirect('/')
         
-    return render(request, 'lists/home.html',{
-        'new_item_text': request.POST.get('item_text', 'A new list item'),
-    })
+    items = Item.objects.all()
+    # print(items[0].id)
+    return render(request, 'lists/home.html', {'items': items})
 
 # Create your views here.
